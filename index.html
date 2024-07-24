@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hello World com API</title>
+	</head>
+	<body>
+		<h1>Resposta da requisição</h1>
+		<button onclick="showMessage()">Mostrar</button>
+		<h2 id="title">Title:</h2>
+		<p id="message">Mensagem:</p>
+		<script>
+			const titleEl = document.getElementById("title");
+			const messageEl = document.getElementById("message");
+
+			function showMessage() {
+				fetch("https://api-greeting.vercel.app/")
+					.then((response) => response.json())
+					.then((data) => {
+						const { title, message } = data[0];
+						titleEl.textContent += ` ${title}`;
+						messageEl.textContent += ` ${message}`;
+					})
+					.catch((error) => console.error("Error:", error));
+			}
+		</script>
+	</body>
+</html>
